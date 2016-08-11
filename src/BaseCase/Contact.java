@@ -9,31 +9,36 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 import org.junit.Test;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.apache.log4j.*;
 
 import io.appium.java_client.android.AndroidDriver;
+
+import CapabilityInfo.Capability;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Contact{
 	
 	public static AndroidDriver driver; 
-	
+
+	static Logger logger=Logger.getLogger(Contact.class);
+
+
 	@Before
-	public void setUp() throws Exception {
-	           
+	public void setUp() throws Exception {           
 	    DesiredCapabilities capabilities = new DesiredCapabilities();
 	    capabilities.setCapability("newCommandTimeout",1800000);//30mins
-	    capabilities.setCapability("platformName", "Android");
-//	     capabilities.setCapability("deviceName", "SORG7PEAIF8DOZRO");
-	//  capabilities.setCapability("app", app.getAbsolutePath());
-	    capabilities.setCapability("deviceName", "EIJZIVGASO9SWCIZ");       
-	    capabilities.setCapability("platformVersion", "5.1");       
+	    capabilities.setCapability("platformName", Capability.platformName);
+	    capabilities.setCapability("platformVersion", Capability.platformVersion); 
+	    capabilities.setCapability("deviceName", Capability.deviceName);           
+//		capabilities.setCapability("app", app.getAbsolutePath());
 	    capabilities.setCapability("appPackage", "com.android.contacts");  
 	    capabilities.setCapability("appActivity", ".activities.PeopleActivity");   
 	    capabilities.setCapability("unicodeKeyboard", "True");  
 	    capabilities.setCapability("resetKeyboard", "True");
-	    driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities); 
+	    driver = new AndroidDriver(new URL(Capability.driverURL), capabilities); 
 	    
 	}
 	 @After
@@ -43,24 +48,31 @@ public class Contact{
 	 
 	 @Test
 	 public void Contact01_ClearAll(){		 
-		 driver.findElementByAccessibilityId("更多选项").click();
-		 driver.findElementByName("删除联系人").click();
-		 driver.findElementById("com.android.contacts:id/select_items").click();
 		 
-		 try{Thread.sleep(1000);
-	  	   }catch(Exception e){System.out.print(e);}
-		 
-		 driver.tap(1,380,210,500);  //全选按钮
-		 
-		 try{Thread.sleep(1000);
-	  	   }catch(Exception e){System.out.print(e);}
-		 
-		 driver.findElementByName("确定").click();
-		 
-		 driver.findElementById("android:id/button1").click();
-		 
-		 try{Thread.sleep(3000);
-	  	   }catch(Exception e){System.out.print(e);}	 
+		 try{
+			 if(driver.findElementByName("Abc")!=null){			 
+				 driver.findElementByAccessibilityId("更多选项").click();
+				 driver.findElementByName("删除联系人").click();
+				 driver.findElementById("com.android.contacts:id/select_items").click();
+				 
+				 Thread.sleep(1000);
+				 
+				 driver.tap(1,380,210,500);  //全选按钮
+				 
+				 Thread.sleep(1000);
+				 
+				 driver.findElementByName("确定").click();				 
+				 driver.findElementById("android:id/button1").click();				 
+				 
+				 Thread.sleep(3000);
+				 
+				 logger.fatal("Contact-ClearAll:pass");
+				 
+			 }
+		 }catch(Exception e){
+			 System.out.print(e);
+			 logger.fatal("Contact-ClearAll:pass (No contact)");
+			 }
 	 }
 
 	 @Test
@@ -83,6 +95,8 @@ public class Contact{
 		 //点击确认按钮
 		 driver.tap(1,50,100,1000);
 		 
+		 logger.fatal("Contact-Creat:pass");
+		 
 		 try{
   		   Thread.sleep(3000);
   	   }catch(Exception e){
@@ -97,7 +111,7 @@ public class Contact{
 	  		   System.out.print(e);
 	  	   }	
 		 
-		 driver.sendKeyEvent(4);
+		 driver.sendKeyEvent(4);		
 		 
 	}
 	 
@@ -108,6 +122,8 @@ public class Contact{
 		driver.findElementByName("Abc").click();
 		driver.findElementByName("确定").click();
 		driver.findElementById("android:id/button1").click();
+		
+		logger.fatal("Contac-Delete:pass");
 		
 		 try{
 	  		   Thread.sleep(3000);

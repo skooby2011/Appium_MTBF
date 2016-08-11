@@ -11,6 +11,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.android.AndroidDriver;
 
+import CapabilityInfo.Capability;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Browser{
 	
@@ -21,16 +23,15 @@ public static AndroidDriver driver;
 	           
 	    DesiredCapabilities capabilities = new DesiredCapabilities();
 	    capabilities.setCapability("newCommandTimeout",1800000);//30mins
-	    capabilities.setCapability("platformName", "Android");
-//	     capabilities.setCapability("deviceName", "SORG7PEAIF8DOZRO");
+	    capabilities.setCapability("platformName", Capability.platformName);
+	    capabilities.setCapability("platformVersion",Capability.platformVersion );     
+	    capabilities.setCapability("deviceName", Capability.deviceName);         
 	//  capabilities.setCapability("app", app.getAbsolutePath());
-	    capabilities.setCapability("deviceName", "EIJZIVGASO9SWCIZ");       
-	    capabilities.setCapability("platformVersion", "5.1");       
 	    capabilities.setCapability("appPackage", "com.tencent.mtt");  
 	    capabilities.setCapability("appActivity", "com.tencent.mtt.MainActivity");   
 	    capabilities.setCapability("unicodeKeyboard", "True");  
 	    capabilities.setCapability("resetKeyboard", "True");
-	    driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities); 
+	    driver = new AndroidDriver(new URL(Capability.driverURL), capabilities); 
 	    
 	}
 	
