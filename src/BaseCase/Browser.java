@@ -4,12 +4,15 @@ import java.net.URL;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
+import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.android.AndroidDriver;
-import junit.framework.TestCase;
 
-public class Browser extends TestCase{
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class Browser{
 	
 public static AndroidDriver driver; 
 	
@@ -36,7 +39,8 @@ public static AndroidDriver driver;
 	        driver.quit();
 	    }
 	 
-	 public void testClearData(){
+	 @Test
+	 public void Browser01_ClearData(){
 		 
 		 driver.findElementByAccessibilityId("菜单").click();
 		 
@@ -72,12 +76,9 @@ public static AndroidDriver driver;
 		 driver.findElementByName("清除").click();		 		 		 
 	 }
 	 
-	 public void testBrowse(){
-		 
-		 driver.startActivity("com.tencent.mtt", "com.tencent.mtt.MainActivity");
-		 
-		 driver.findElementByAccessibilityId("菜单").click();
-		 
+	 @Test
+	 public void Browser02_Browse(){
+		 driver.findElementByAccessibilityId("菜单").click();		 
 		 driver.findElementByAccessibilityId("书签/历史").click();
 		 
 		 try{Thread.sleep(1000);
@@ -86,11 +87,6 @@ public static AndroidDriver driver;
 		 driver.findElementByName("百度一下").click();
 		 
 		 try{Thread.sleep(3000);
-	  	   }catch(Exception e){System.out.print(e);}
-		 
-		 
+	  	   }catch(Exception e){System.out.print(e);}		 
 	 }
-	 
-	 
-
 }

@@ -1,16 +1,21 @@
 package BaseCase;
 
+import static org.junit.Assert.*;
+
 import java.net.URL;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
+import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.android.AndroidDriver;
-import junit.framework.TestCase;
 
-public class Contact extends TestCase{
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class Contact{
 	
 	public static AndroidDriver driver; 
 	
@@ -32,12 +37,34 @@ public class Contact extends TestCase{
 	    
 	}
 	 @After
-	    public void tearDown() throws Exception {
-	        driver.quit();
-	    }
-
+	 public void tearDown() throws Exception {
+		 driver.quit();
+		 }
 	 
-	public void testCreat(){
+	 @Test
+	 public void Contact01_ClearAll(){		 
+		 driver.findElementByAccessibilityId("更多选项").click();
+		 driver.findElementByName("删除联系人").click();
+		 driver.findElementById("com.android.contacts:id/select_items").click();
+		 
+		 try{Thread.sleep(1000);
+	  	   }catch(Exception e){System.out.print(e);}
+		 
+		 driver.tap(1,380,210,500);  //全选按钮
+		 
+		 try{Thread.sleep(1000);
+	  	   }catch(Exception e){System.out.print(e);}
+		 
+		 driver.findElementByName("确定").click();
+		 
+		 driver.findElementById("android:id/button1").click();
+		 
+		 try{Thread.sleep(3000);
+	  	   }catch(Exception e){System.out.print(e);}	 
+	 }
+
+	 @Test
+	 public void Contact02_Creat(){		
 		driver.findElementById("com.android.contacts:id/floating_action_button").click();		 
 		 
 		 WebElement name = driver.findElementByName("姓名");
@@ -73,13 +100,10 @@ public class Contact extends TestCase{
 		 driver.sendKeyEvent(4);
 		 
 	}
-	
-	public void testDelete(){
-		
-		driver.startActivity("com.android.contacts", "com.android.contacts.activities.PeopleActivity");
-		
-		//根据content-desc查找元素
-		driver.findElementByAccessibilityId("更多选项").click();
+	 
+	 @Test
+	 public void Contact03_Delete(){	
+		driver.findElementByAccessibilityId("更多选项").click();  //根据content-desc查找元素
 		driver.findElementByName("删除联系人").click();
 		driver.findElementByName("Abc").click();
 		driver.findElementByName("确定").click();
@@ -90,5 +114,5 @@ public class Contact extends TestCase{
 	  	   }catch(Exception e){
 	  		   System.out.print(e);
 	   }	
-	}
+	}	
 }

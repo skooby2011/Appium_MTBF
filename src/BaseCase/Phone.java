@@ -1,18 +1,19 @@
 package BaseCase;
 
-import junit.framework.TestCase;
-
 import java.net.URL;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
+import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.android.AndroidDriver;
 
-
-public class Phone extends TestCase{
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class Phone{
 	
 	public static AndroidDriver driver;
 	
@@ -38,11 +39,8 @@ public class Phone extends TestCase{
 	        driver.quit();
 	    }
 
-	
-	public void testDail(){
-		
-//		driver.startActivity("com.android.dialer", ".DialtactsActivity");
-		
+	@Test
+	public void Phone01_Dail(){
 		driver.findElementById("com.android.dialer:id/floating_action_button").click();
 		
 		 try{
@@ -68,11 +66,5 @@ public class Phone extends TestCase{
 	  	   }catch(Exception e){
 	  		   System.out.print(e);
 	  	   }
-		
-		
-		
-		
 	}
-	
-
 }
