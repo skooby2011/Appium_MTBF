@@ -20,11 +20,8 @@ import CapabilityInfo.Capability;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Contact{
-	
-	public static AndroidDriver driver; 
-
+	static AndroidDriver driver; 
 	static Logger logger=Logger.getLogger(Contact.class);
-
 
 	@Before
 	public void setUp() throws Exception {           
@@ -47,88 +44,88 @@ public class Contact{
 		 }
 	 
 	 @Test
-	 public void Contact01_ClearAll(){		 
-		 
+	 public void Contact01_clearAll(){		 
 		 try{
 			 if(driver.findElementByName("Abc")!=null){			 
 				 driver.findElementByAccessibilityId("更多选项").click();
 				 driver.findElementByName("删除联系人").click();
 				 driver.findElementById("com.android.contacts:id/select_items").click();
-				 
 				 Thread.sleep(1000);
-				 
 				 driver.tap(1,380,210,500);  //全选按钮
-				 
 				 Thread.sleep(1000);
-				 
 				 driver.findElementByName("确定").click();				 
 				 driver.findElementById("android:id/button1").click();				 
-				 
 				 Thread.sleep(3000);
-				 
-				 logger.fatal("Contact-ClearAll:pass");
+				 logger.fatal("Contact-clearAll:pass");
 				 
 			 }
 		 }catch(Exception e){
-			 System.out.print(e);
-			 logger.fatal("Contact-ClearAll:pass (No contact)");
+			 if(e.getClass().getName()=="org.openqa.selenium.NoSuchElementException"){
+				 logger.fatal("Contact-clearAll:pass (No contact)");
+			 }else{
+				 e.printStackTrace();
+			 	}			 	 
 			 }
 	 }
 
 	 @Test
-	 public void Contact02_Creat(){		
-		driver.findElementById("com.android.contacts:id/floating_action_button").click();		 
-		 
-		 WebElement name = driver.findElementByName("姓名");
-		 name.click();
-		 name.sendKeys("Abc");
-		 
-//		 driver.sendKeyEvent(66);   //模拟返回键
-		 driver.swipe(690, 500, 690, 50, 3000);
-		 
-		 //输入电话号码
-		 WebElement number = driver.findElementByClassName("android.widget.EditText");
-		 assertEquals("电话", number.getText());
-		 number.click();
-		 number.sendKeys("10086");
-		 
-		 //点击确认按钮
-		 driver.tap(1,50,100,1000);
-		 
-		 logger.fatal("Contact-Creat:pass");
-		 
+	 public void Contact02_creat(){		
 		 try{
-  		   Thread.sleep(3000);
-  	   }catch(Exception e){
-  		   System.out.print(e);
-  	   }		 
-		 
-		 driver.sendKeyEvent(4); //点返回键
-		 
-		 try{
-	  		   Thread.sleep(1000);
-	  	   }catch(Exception e){
-	  		   System.out.print(e);
-	  	   }	
-		 
-		 driver.sendKeyEvent(4);		
-		 
+			 driver.findElementById("com.android.contacts:id/floating_action_button").click();		 
+			 WebElement name = driver.findElementByName("姓名");
+			 name.click();
+			 name.sendKeys("Abc");
+			 
+//			 driver.sendKeyEvent(66);   //模拟返回键
+			 driver.swipe(690, 500, 690, 50, 3000);
+			 
+			 //输入电话号码
+			 WebElement number = driver.findElementByClassName("android.widget.EditText");
+			 assertEquals("电话", number.getText());
+			 number.click();
+			 number.sendKeys("10086");
+			 
+			 driver.tap(1,50,100,1000);//点击确认按钮
+	  		 Thread.sleep(3000);
+			 driver.sendKeyEvent(4); //点返回键，到联系人列表
+			 Thread.sleep(3000);
+			 
+			 if(driver.findElementByName("Abc").isDisplayed()){
+				 logger.fatal("Contact-creat:pass");
+			 }else{
+				 logger.fatal("Contact-creat:fail");
+			 }
+		  	 Thread.sleep(1000);
+			 
+			 driver.sendKeyEvent(4);	
+		 }catch(Exception e){
+			 if(e.getClass().getName()=="org.openqa.selenium.NoSuchElementException"){
+				 logger.fatal("Contact-creat:fail");
+			 }else{
+				 e.printStackTrace();
+			}
+		 }
 	}
 	 
 	 @Test
-	 public void Contact03_Delete(){	
-		driver.findElementByAccessibilityId("更多选项").click();  //根据content-desc查找元素
-		driver.findElementByName("删除联系人").click();
-		driver.findElementByName("Abc").click();
-		driver.findElementByName("确定").click();
-		driver.findElementById("android:id/button1").click();
-		
-		logger.fatal("Contac-Delete:pass");
-		
+	 public void Contact03_delete(){	
 		 try{
-	  		   Thread.sleep(3000);
+			driver.findElementByAccessibilityId("更多选项").click();  //根据content-desc查找元素
+			driver.findElementByName("删除联系人").click();
+			driver.findElementByName("Abc").click();
+			driver.findElementByName("确定").click();
+			driver.findElementById("android:id/button1").click();
+			
+			logger.fatal("Contac-delete:pass");
+			 
+		  	Thread.sleep(3000);
+		  	
 	  	   }catch(Exception e){
-	  		   System.out.print(e);
+		  		 if(e.getClass().getName()=="org.openqa.selenium.NoSuchElementException"){
+					 logger.fatal("Contac-delete:fail");
+				 }else{
+					 e.printStackTrace();
+			}
 	   }	
 	}	
 }
