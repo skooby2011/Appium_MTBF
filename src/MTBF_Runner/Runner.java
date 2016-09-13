@@ -15,7 +15,7 @@ public class Runner extends TestCase {
 	
 	public void testRunner(){
 		
-		for(int i=0;i<2;i++){
+		for(int i=0;i<3;i++){
 			logger.fatal("circle"+i+"-------------------------------------start");
 			
 			//MTBF002
