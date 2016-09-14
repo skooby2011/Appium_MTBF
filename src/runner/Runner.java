@@ -9,6 +9,7 @@ import base.Phone;
 import base.PhoneAndBrowse;
 import capability.Capability;
 import junit.framework.TestCase;
+import utility.AdbCommand;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,14 +19,16 @@ import org.apache.log4j.*;
 
 public class Runner extends TestCase {
 	static Logger logger=Logger.getLogger(Runner.class);
+	final int CIRCLE = 1 ;
 	
 	public void testRunner(){
 		
-		for(int i=0;i<10;i++){
+		for(int i=1;i<=CIRCLE;i++){
 			logger.fatal("circle"+i+"-------------------------------------start");
 			
 			try{
-				execCommand("adb connect "+Capability.deviceName);
+				AdbCommand.execCommand("adb connect "+Capability.deviceName);
+				AdbCommand.takeScreenshot();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -55,31 +58,4 @@ public class Runner extends TestCase {
 			logger.fatal(testCaseName+":fail" + result.getFailures());
 		}
 	}
-	
-	public void execCommand(String command) throws IOException {
-	    Runtime runtime = Runtime.getRuntime();
-	    Process proc = runtime.exec(command);
-	    try {
-	        if (proc.waitFor() != 0) {
-	            System.err.println("exit value = " + proc.exitValue());
-	        }
-	        BufferedReader in = new BufferedReader(new InputStreamReader(
-	                proc.getInputStream()));
-	        StringBuffer stringBuffer = new StringBuffer();
-	        String line = null;
-	        while ((line = in.readLine()) != null) {
-	            stringBuffer.append(line+" ");
-	        }
-	        System.out.println(stringBuffer.toString());
-	 
-	    } catch (InterruptedException e) {
-	        System.err.println(e);
-	    }finally{
-	        try {
-	            proc.destroy();
-	        } catch (Exception e2) {
-	        }
-	    }
-	}
-	
 }
