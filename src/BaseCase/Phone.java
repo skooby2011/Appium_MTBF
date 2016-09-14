@@ -33,8 +33,8 @@ public class Phone{
 	
 	static AndroidDriver  driver;
 	static Logger logger=Logger.getLogger(Phone.class);
-	final String testCaseName = "PhoneCall";
-	final File image = new File("D:\\Appium\\expected\\"+testCaseName+".jpg");
+	final String TESTCASENAME = "PhoneCall";
+	final File IMAGE = new File("D:\\Appium\\expected\\"+TESTCASENAME+".jpg");
 	
 	@Before
 	public void setUp() throws Exception {
@@ -82,8 +82,8 @@ public class Phone{
 			   String time = dateFormat.format(now).toString();
 			   logger.fatal(time);
 		  	
-		  	ScreenshotCompare.takeScreenShotat(driver,testCaseName);
-		  	logger.fatal(ScreenshotCompare.getResult(image));
+		  	File actualImage = ScreenshotCompare.takeScreenShotat(driver,TESTCASENAME);
+		  	logger.fatal(ScreenshotCompare.getResult(actualImage,IMAGE));
 		  	
 		  	if(driver.findElementByName("10086").isDisplayed()
 		  			&driver.findElementById("com.android.dialer:id/call_type_icons").isDisplayed()){

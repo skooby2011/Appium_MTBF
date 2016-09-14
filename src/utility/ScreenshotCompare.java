@@ -14,11 +14,11 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class ScreenshotCompare {
 	
-	public static File actualImage;
+	public static File image = null ;
 
 	
 	//自动截图，并将图片保存至本地
-	public static void takeScreenShotat(AndroidDriver driver,String testCaseName){  
+	public static File takeScreenShotat(AndroidDriver driver,String testCaseName){  
 		   try {   
 			   String filePath = "D:\\Appium\\actual";
 			   File path = new File(filePath);
@@ -26,23 +26,21 @@ public class ScreenshotCompare {
 		            path.mkdir(); // 目录不存在的情况下，会抛出异常  
 		        }  
 			   
-			  	Date now = new Date(); 
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");//可以方便地修改日期格式
-				String time = dateFormat.format(now).toString();
-			   
-			  
-			   
-			    File pic = new File(filePath+"\\"+testCaseName+".jpg");
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");//可以方便地修改日期格式
+				String time = dateFormat.format(new Date()).toString();
+
+			    File pic = new File(filePath+"\\"+testCaseName+"-"+time+".jpg");
 			    if (!pic.exists()) {
 		            pic.createNewFile();  
 		        }  
 		        File f1=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		        FileUtils.copyFile(f1,pic);    
-		        
-		        actualImage = new File(filePath+"\\"+testCaseName+".jpg");	
+
+		        image = new File(filePath+"\\"+testCaseName+"-"+time+".jpg");	
 		        
 		   }       
-		   catch (IOException e) {e.printStackTrace();}  
+		   catch (IOException e) {e.printStackTrace();}
+		return image;  
 		} 
 	
 	//获取本地已保存的文件
@@ -78,11 +76,11 @@ public class ScreenshotCompare {
 	    }   
 	    double numberPixels = height * width;   
 	    double diffPercent = numDiffPixels / numberPixels;  
-	    return percent <= 1.0D - diffPercent;
+	    return percent <= 0.01D - diffPercent;
 	 }
 	
 	//获取图片对比结果
-	public static String getResult(File expectedImage){
+	public static String getResult(File actualImage,File expectedImage){
     Boolean same;
     String result=null;
 
