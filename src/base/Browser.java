@@ -1,4 +1,4 @@
-package BaseCase;
+package base;
 
 import java.net.URL;
 
@@ -10,9 +10,8 @@ import org.junit.runners.MethodSorters;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import capability.Capability;
 import io.appium.java_client.android.AndroidDriver;
-
-import CapabilityInfo.Capability;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Browser{

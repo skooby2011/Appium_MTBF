@@ -1,4 +1,4 @@
-package CapabilityInfo;
+package capability;
 
 public class Capability {	
 	public static String deviceName = "172.16.0.22:5555";

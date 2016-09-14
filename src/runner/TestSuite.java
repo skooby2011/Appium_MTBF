@@ -1,11 +1,11 @@
-package MTBF_Runner;
+package runner;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import BaseCase.Contact;
-import BaseCase.Phone;
-import BaseCase.Browser;
+import base.Browser;
+import base.Contact;
+import base.Phone;
 
 
 @RunWith(Suite.class)

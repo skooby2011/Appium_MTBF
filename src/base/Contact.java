@@ -1,4 +1,4 @@
-package BaseCase;
+package base;
 
 import static org.junit.Assert.*;
 
@@ -12,11 +12,12 @@ import org.junit.Test;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import capability.Capability;
+
 import org.apache.log4j.*;
 
 import io.appium.java_client.android.AndroidDriver;
-
-import CapabilityInfo.Capability;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Contact{

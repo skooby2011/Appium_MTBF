@@ -1,4 +1,4 @@
-package BaseCase;
+package base;
 
 import java.net.URL;
 
@@ -11,7 +11,7 @@ import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import CapabilityInfo.Capability;
+import capability.Capability;
 import io.appium.java_client.android.AndroidDriver;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

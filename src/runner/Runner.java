@@ -1,13 +1,13 @@
-package MTBF_Runner;
+package runner;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
-import BaseCase.Browser;
-import BaseCase.Contact;
-import BaseCase.Phone;
-import BaseCase.PhoneAndBrowse;
-import CapabilityInfo.Capability;
+import base.Browser;
+import base.Contact;
+import base.Phone;
+import base.PhoneAndBrowse;
+import capability.Capability;
 import junit.framework.TestCase;
 
 import java.io.BufferedReader;

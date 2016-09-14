@@ -1,4 +1,4 @@
-package BaseCase;
+package base;
 
 
 import java.io.File;
@@ -23,9 +23,8 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import capability.Capability;
 import io.appium.java_client.android.AndroidDriver;
-
-import CapabilityInfo.Capability;
 import utility.ScreenshotCompare;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
