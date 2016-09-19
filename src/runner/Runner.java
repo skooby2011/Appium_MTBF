@@ -12,9 +12,6 @@ import db.ResultDB;
 import junit.framework.TestCase;
 import utility.AdbCommand;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 import org.apache.log4j.*;
 
@@ -43,7 +40,7 @@ public class Runner extends TestCase {
 			//MTBF003
 			Result phone = JUnitCore.runClasses(Phone.class);
 			passOrFail(phone,"phone");
-			ResultDB.showResultDB();
+			ResultDB.getResultDB();
 
 			
 			//MTBF011

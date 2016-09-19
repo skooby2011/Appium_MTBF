@@ -16,7 +16,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import capability.Capability;
 import db.ResultDB;
 import io.appium.java_client.android.AndroidDriver;
-import runner.Runner;
 import utility.ScreenshotCompare;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
