@@ -2,11 +2,11 @@
 基于JUnit，使用appium编写的安卓自动化测试用例
 
 ###用到的第三方库
-log4j-1.2.7
-java-client-2.2.0
-selenium-java-2.44.0
-selenium-server-standalone-2.44.0
-mysql-connector-java-5.1.39
+- log4j-1.2.7
+- java-client-2.2.0
+- selenium-java-2.44.0
+- selenium-server-standalone-2.44.0
+- mysql-connector-java-5.1.39
 
 ###主要逻辑
 1. base中编写基础测试用例
