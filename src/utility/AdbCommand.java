@@ -9,6 +9,8 @@ import java.util.Date;
 
 public class AdbCommand {
 	
+	static Thread t;
+	
 	public static void execCommand(String command) throws IOException {
 	    Runtime runtime = Runtime.getRuntime();
 	    Process proc = runtime.exec(command);
@@ -35,18 +37,26 @@ public class AdbCommand {
 	    }
 	}
 	
-	public static void takeScreenshot(){
-		try{
-		execCommand("adb shell screencap -p /sdcard/screen.png");
-		execCommand("adb pull /sdcard/screen.png D:\\Appium\\screenshot");
-		execCommand("adb shell rm /sdcard/screen.png");
-		
-		renameFile("D:\\Appium\\screenshot\\screen.png");
-		}catch(Exception e){
-			e.printStackTrace();
+	public static void takeScreenshot(){	  
+		if(t==null){
+			t = new Thread(){
+				public void run(){
+					try{
+						execCommand("adb shell screencap -p /sdcard/screen.png");
+						execCommand("adb pull /sdcard/screen.png D:\\Appium\\screenshot");
+						execCommand("adb shell rm /sdcard/screen.png");
+						
+						renameFile("D:\\Appium\\screenshot\\screen.png");
+						}catch(Exception e){
+							e.printStackTrace();
+						}
+				}
+			};
+			t.start();
 		}
+		t = null;
 	}
-	
+
 	 public static void renameFile(String oldFile)  
 	            throws IOException {  
 		 

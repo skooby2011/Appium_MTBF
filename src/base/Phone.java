@@ -14,7 +14,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import capability.Capability;
+import db.ResultDB;
 import io.appium.java_client.android.AndroidDriver;
+import runner.Runner;
 import utility.ScreenshotCompare;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -24,6 +26,9 @@ public class Phone{
 	static Logger logger=Logger.getLogger(Phone.class);
 	final String TESTCASENAME = "PhoneCall";
 	final File IMAGE = new File("D:\\Appium\\expected\\"+TESTCASENAME+".jpg");
+	
+	public static int phonePassNum = 0 ; 
+	public static int phonePailNum = 0 ;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -71,11 +76,16 @@ public class Phone{
 		  	
 		  	if(driver.findElementByName("10086").isDisplayed()
 		  			&driver.findElementById("com.android.dialer:id/call_type_icons").isDisplayed()){
-		  		logger.fatal("Phone-dail:pass");		
+		  		logger.fatal("Phone-dail:pass");	
+		  		phonePassNum ++;
+		  		ResultDB.updatePassDB(phonePassNum);
 		  	}
 		}catch(Exception e){
 			 if(e.getClass().getName()=="org.openqa.selenium.NoSuchElementException"){
 				 logger.fatal("Phone-dail:fail");
+				 phonePailNum++;
+				 ResultDB.updateFailDB(phonePailNum);
+				 
 			 }else{e.printStackTrace();
 			}
 		}

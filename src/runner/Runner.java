@@ -8,6 +8,7 @@ import base.Contact;
 import base.Phone;
 import base.PhoneAndBrowse;
 import capability.Capability;
+import db.ResultDB;
 import junit.framework.TestCase;
 import utility.AdbCommand;
 
@@ -18,8 +19,11 @@ import java.io.InputStreamReader;
 import org.apache.log4j.*;
 
 public class Runner extends TestCase {
+	
+
+	 
 	static Logger logger=Logger.getLogger(Runner.class);
-	final int CIRCLE = 1 ;
+	final int CIRCLE = 3 ;
 	
 	public void testRunner(){
 		
@@ -39,6 +43,7 @@ public class Runner extends TestCase {
 			//MTBF003
 			Result phone = JUnitCore.runClasses(Phone.class);
 			passOrFail(phone,"phone");
+			ResultDB.showResultDB();
 
 			
 			//MTBF011

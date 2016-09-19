@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="F:/Android_tools/ThirdLib/java-client-2.2.0.jar"/>
 	<classpathentry kind="lib" path="F:/Android_tools/ThirdLib/selenium-java-2.44.0.jar"/>
 	<classpathentry kind="lib" path="F:/Android_tools/ThirdLib/selenium-server-standalone-2.44.0.jar"/>
+	<classpathentry kind="lib" path="F:/Android_tools/ThirdLib/mysql-connector-java-5.1.39/mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
